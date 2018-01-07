@@ -1,0 +1,25 @@
+spring:
+  thymeleaf:
+    mode: HTML
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: yinxin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+logging:
+   level:
+     root: info
+     com.myx: debug
+   file: log/myblog.log
+   
+server:  
+  port: 80
+  session-timeout: 30  
+  tomcat.max-threads: 0  
+  tomcat.uri-encoding: UTF-8 
