@@ -37,7 +37,10 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public Blog getBlog(Long id) {
-		return blogRepository.findOne(id);
+		
+		Blog one = blogRepository.findOne(id);
+		
+		return one;
 	}
 
 	@Override
@@ -75,14 +78,29 @@ public class BlogServiceImpl implements BlogService {
 		return blogRepository.save(blog);
 	}
 
+	//修改博客
+	@Transactional
 	@Override
 	public Blog updateBlog(Long id, Blog blog) {
 		Blog b = blogRepository.findOne(id);
 		if (b == null) {
 			throw new NotFoundException("博客不存在");
 		}
-		BeanUtils.copyProperties(b, blog);
-		return blogRepository.save(b);
+		b.setContent(blog.getContent());
+		b.setDescription(blog.getDescription());
+		b.setFirstPicture(blog.getFirstPicture());
+		b.setFlag(blog.getFlag());
+		b.setTags(blog.getTags());
+		b.setType(blog.getType());
+		b.setTitle(blog.getTitle());
+		b.setCommentabled(blog.isCommentabled());
+		b.setPublished(blog.isPublished());
+		b.setAppreciation(blog.isAppreciation());
+		b.setShareStatement(blog.isShareStatement());
+		b.setRecommend(blog.isRecommend());
+		//BeanUtils.copyProperties(blog, b);
+		Blog one = blogRepository.save(b);
+		return one;
 	}
 
 	@Override
@@ -118,6 +136,9 @@ public class BlogServiceImpl implements BlogService {
 		Blog one = blogRepository.findOne(id);
 		if(one ==null){
 			throw new NotFoundException("该博客不存在");
+		}else{
+			one.setViews(one.getViews()+1);
+			blogRepository.save(one);
 		}
 		Blog b = new Blog();
 		BeanUtils.copyProperties(one, b);

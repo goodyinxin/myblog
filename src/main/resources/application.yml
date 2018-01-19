@@ -10,7 +10,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     
 logging:
    level:
@@ -19,7 +19,13 @@ logging:
    file: log/myblog.log
    
 server:  
-  port: 80
+  port: 443
   session-timeout: 30  
   tomcat.max-threads: 0  
   tomcat.uri-encoding: UTF-8 
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 56844813
+    keyStoreType: PKCS12
+    keyAlias: tomcat
+    
