@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://47.93.59.160:3306/myblog?useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: yinxin
   jpa:
@@ -19,13 +19,13 @@ logging:
    file: log/myblog.log
    
 server:  
-  port: 443
+  port: 8080
   session-timeout: 30  
   tomcat.max-threads: 0  
   tomcat.uri-encoding: UTF-8 
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: 56844813
-    keyStoreType: PKCS12
-    keyAlias: tomcat
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: 56844813
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
     

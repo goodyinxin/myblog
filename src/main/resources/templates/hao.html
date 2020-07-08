@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>羁绊</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css">
+    <script type="text/javascript" charset="utf-8"  src="https://files.cnblogs.com/files/liuzhou1/L2Dwidget.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8"  src="https://files.cnblogs.com/files/liuzhou1/L2Dwidget.min.js"></script>
+    <!-- 导入Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<style>
+    #app{
+        width: 500px;
+        margin: 200px auto;
+    }
+    i{
+        font-size: 40px;
+    }
+</style>
+<body>
+
+<div id="app">
+
+
+
+    <div>
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <el-progress :text-inside="true" :stroke-width="po" :color="customColorMethod" :percentage="percentage" ></el-progress>
+    </div>
+
+    <br><br>
+   <!-- <el-button type="primary" icon="el-icon-plus"  @click="increase"></el-button>
+    <el-button type="primary" icon="el-icon-minus" @click="decrease"></el-button>-->
+    <el-button type="primary" icon="el-icon-refresh-left"></el-button>
+</div>
+</body>
+<script th:inline="javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                percentage: 20,
+                customColor: '#409eff',
+                customColors: [
+                    {color: '#f56c6c', percentage: 20},
+                    {color: '#e6a23c', percentage: 40},
+                    {color: '#5cb87a', percentage: 60},
+                    {color: '#1989fa', percentage: 80},
+                    {color: '#6f7ad3', percentage: 100}
+                ],
+
+                totle:[[${haoUser.total}]],
+                current:[[${haoUser.current}]],
+                level:[[${haoUser.level}]],
+                point:'',
+            };
+        },
+        methods: {
+            customColorMethod(percentage) {
+                if (percentage < 30) {
+                    return '#909399';
+                } else if (percentage < 70) {
+                    return '#e6a23c';
+                } else {
+                    return '#67c23a';
+                }
+            },
+
+
+            getpoint(){
+               var po = this.current/this.totle
+                console.log("point",po)
+                this.point=po;
+                console.log("this.point",this.point)
+            },
+            increase() {
+                this.percentage += 10;
+                if (this.percentage > 100) {
+                    this.percentage = 100;
+                }
+            },
+            decrease() {
+                this.percentage -= 10;
+                if (this.percentage < 0) {
+                    this.percentage = 0;
+                }
+            }
+        }
+    })
+
+    L2Dwidget.init({"display": {
+            "superSample": 2,
+            "width": 200,
+            "height": 400,
+            "position": "right",
+            "hOffset": 0,
+            "vOffset": 0
+        }
+    });
+</script>
+</html>
